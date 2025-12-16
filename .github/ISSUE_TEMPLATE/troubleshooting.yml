@@ -1,0 +1,22 @@
+name: Troubleshooting Entry
+description: Submit a problem and how you fixed it
+title: "[Fix] "
+labels: ["troubleshooting"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Problem title
+      description: Short title for the issue
+      placeholder: "Macro can’t claim a hive"
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: How you fixed it
+      description: Steps that solved the problem
+      placeholder: "Write the steps that fixed it, in order…"
+    validations:
+      required: true
