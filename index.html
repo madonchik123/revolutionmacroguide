@@ -217,6 +217,7 @@
       background: rgba(15, 17, 21, 0.92);
       backdrop-filter: blur(8px);
       display: none;
+      z-index: 1000;
     }
 
     .guide-nav a {
@@ -247,6 +248,59 @@
 
       body {
         padding-left: 20px;
+      }
+    }
+
+    /* ===== Neon category boxes for Troubleshooting (ADDED) ===== */
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 12px 0 18px 0;
+    }
+
+    .cat-card {
+      cursor: pointer;
+      border-radius: 16px;
+      padding: 14px 14px;
+      border: 1px solid rgba(0, 255, 255, 0.35);
+      background: rgba(12, 14, 18, 0.65);
+      box-shadow:
+        0 0 0 1px rgba(0, 255, 255, 0.18) inset,
+        0 0 18px rgba(0, 255, 255, 0.12);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+
+    .cat-card:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 0 1px rgba(0, 255, 255, 0.28) inset,
+        0 0 26px rgba(0, 255, 255, 0.22);
+    }
+
+    .cat-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #24f0ff;
+      margin-bottom: 6px;
+      text-shadow: 0 0 12px rgba(36, 240, 255, 0.25);
+    }
+
+    .cat-sub {
+      font-size: 12px;
+      opacity: 0.85;
+      line-height: 1.3;
+    }
+
+    @media (max-width: 999px) {
+      .cat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .cat-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -294,6 +348,26 @@
       </a>
     </p>
 
+    <!-- CATEGORY CARDS (ADDED) -->
+    <div class="cat-grid" id="catGrid">
+      <div class="cat-card" onclick="jumpToCategory('mac')">
+        <div class="cat-title">Mac</div>
+        <div class="cat-sub">Accessibility, permissions, macOS fixes</div>
+      </div>
+      <div class="cat-card" onclick="jumpToCategory('windows')">
+        <div class="cat-title">Windows</div>
+        <div class="cat-sub">Capture mode, drivers, Windows fixes</div>
+      </div>
+      <div class="cat-card" onclick="jumpToCategory('macro')">
+        <div class="cat-title">Macro</div>
+        <div class="cat-sub">Settings, patterns, routing, resets</div>
+      </div>
+      <div class="cat-card" onclick="jumpToCategory('pro')">
+        <div class="cat-title">Pro</div>
+        <div class="cat-sub">Advanced tips, high efficiency setups</div>
+      </div>
+    </div>
+
     <input id="search" type="text" placeholder="Search issues..."
       style="width:100%;padding:10px;font-size:16px;margin-bottom:20px;">
 
@@ -315,6 +389,15 @@
 
       const nav = document.getElementById("guideNav");
       if (nav) nav.style.display = (tab === "guide") ? "block" : "none";
+    }
+
+    // Jump to category (ADDED)
+    function jumpToCategory(key) {
+      openTab('troubleshooting');
+      setTimeout(() => {
+        const el = document.getElementById(`cat-${key}`);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
     }
 
     async function loadIssues() {
@@ -348,6 +431,7 @@
         const header = document.createElement("h3");
         header.className = "section-title";
         header.textContent = section.title;
+        header.id = `cat-${section.key}`; // (ADDED anchor)
         container.appendChild(header);
 
         const items = normalized.filter(i => i.category === section.key);
@@ -748,9 +832,10 @@ AI Gather Pine Tree - Supreme Saturator
         if (!h.id) h.id = slugify(h.textContent);
       });
 
+      // safer lookup (no CSS.escape)
       targets.forEach(label => {
         const id = slugify(label);
-        const el = guide.querySelector(`#${CSS.escape(id)}`);
+        const el = document.getElementById(id);
         if (!el) return;
 
         const a = document.createElement("a");
@@ -763,6 +848,8 @@ AI Gather Pine Tree - Supreme Saturator
         });
         nav.appendChild(a);
       });
+
+      nav.style.display = "block";
     }
 
     buildGuideNav();
