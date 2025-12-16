@@ -202,6 +202,53 @@
       opacity: 0.7;
       margin-bottom: 10px;
     }
+
+    /* ===== Guide side navigation (ADDED) ===== */
+    .guide-nav {
+      position: fixed;
+      left: 16px;
+      top: 120px;
+      width: 220px;
+      max-height: calc(100vh - 160px);
+      overflow: auto;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(15, 17, 21, 0.92);
+      backdrop-filter: blur(8px);
+      display: none;
+    }
+
+    .guide-nav a {
+      display: block;
+      padding: 8px 10px;
+      margin-bottom: 6px;
+      text-decoration: none;
+      color: #e9e9ea;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(20, 24, 33, 0.65);
+    }
+
+    .guide-nav a:hover {
+      background: rgba(38, 48, 73, 0.90);
+    }
+
+    @media (min-width: 1000px) {
+      body {
+        padding-left: 260px;
+      }
+    }
+
+    @media (max-width: 999px) {
+      .guide-nav {
+        display: none !important;
+      }
+
+      body {
+        padding-left: 20px;
+      }
+    }
   </style>
 </head>
 
@@ -221,6 +268,9 @@
         target="_blank" rel="noopener noreferrer">Submit Fix</a>
     </div>
   </div>
+
+  <!-- GUIDE SIDE NAV (ADDED) -->
+  <div id="guideNav" class="guide-nav"></div>
 
   <!-- TAB BUTTONS -->
   <div class="tab-buttons">
@@ -262,6 +312,9 @@
       document.querySelectorAll('.tab-buttons button').forEach(el => el.classList.remove('active'));
       document.getElementById(tab).classList.add('active');
       document.querySelector(`.tab-buttons button[onclick="openTab('${tab}')"]`).classList.add('active');
+
+      const nav = document.getElementById("guideNav");
+      if (nav) nav.style.display = (tab === "guide") ? "block" : "none";
     }
 
     async function loadIssues() {
@@ -675,9 +728,60 @@ AI Gather Pine Tree - Supreme Saturator
 
     document.getElementById("guideContent").innerHTML = marked.parse(guideMarkdown);
 
+    // ===== Guide side navigation builder (ADDED) =====
+    function slugify(text) {
+      return text.toLowerCase().trim()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-");
+    }
+
+    function buildGuideNav() {
+      const nav = document.getElementById("guideNav");
+      const guide = document.getElementById("guideContent");
+      if (!nav || !guide) return;
+
+      nav.innerHTML = "";
+
+      const targets = [
+        "Gather Tab (1)",
+        "Collect Tab (2)",
+        "Planters Tab (3)",
+        "Status Tab (4)",
+        "Tools Tab (5)",
+        "Settings Tab (6)"
+      ];
+
+      const headings = guide.querySelectorAll("h1, h2, h3");
+      headings.forEach(h => {
+        if (!h.id) h.id = slugify(h.textContent);
+      });
+
+      targets.forEach(label => {
+        const id = slugify(label);
+        const el = guide.querySelector(`#${CSS.escape(id)}`);
+        if (!el) return;
+
+        const a = document.createElement("a");
+        a.href = `#${id}`;
+        a.textContent = label;
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          history.replaceState(null, "", `#${id}`);
+        });
+        nav.appendChild(a);
+      });
+    }
+
+    buildGuideNav();
+
+    const nav = document.getElementById("guideNav");
+    if (nav) nav.style.display = "block";
+
     loadIssues();
   </script>
 
 </body>
 
 </html>
+
