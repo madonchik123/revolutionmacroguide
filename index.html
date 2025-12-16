@@ -79,16 +79,23 @@
   <div id="troubleshooting" class="tab-content">
     <h2>Troubleshooting</h2>
 
+    <p>
+      <a href="https://github.com/RevolutionGuides/revolutionmacroguide/issues/new?template=troubleshooting.yml"
+         target="_blank" rel="noopener noreferrer">
+        Submit a new problem + fix
+      </a>
+    </p>
+
     <input id="search" type="text" placeholder="Search issues..."
       style="width:100%;padding:10px;font-size:16px;margin-bottom:20px;">
 
     <div id="issues"></div>
   </div>
 
-  <!-- Markdown renderer (for showing your 0.8c guide EXACTLY as written) -->
+  <!-- Markdown renderer -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-  <!-- TAB SWITCH SYSTEM -->
+  <!-- TAB SWITCH + TROUBLESHOOTING LOADER -->
   <script>
     function openTab(tab) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -142,7 +149,7 @@
       });
     });
 
-    // Render your 0.8c guide text EXACTLY (verbatim) from Markdown
+    // FULL 0.8c GUIDE (verbatim). Do not edit anything inside this string.
     const guideMarkdown = `# Revolution Macro and basic menu navigation guide
 
 Use this for reference!
