@@ -4,7 +4,13 @@
     "category": "pro",
     "solution": "<div style='border-left:3px solid #ff6b3d;padding-left:12px;margin-bottom:10px;'>🚒 <b>pro</b> — Advanced macro efficiency guidance</div>\n\n<div>This section is intended for experienced users looking to optimize performance, routing, and long-session stability.</div>\n\n<div style='margin-top:10px;font-size:13px;opacity:0.75;'>Added by <b>@nosyliam</b></div>"
   },
-
+  
+  {
+    "title": "Access is denied - @RevolutionGuides",
+    "category": "windows",
+    "solution": "<div style=\"border-left:3px solid #24f0ff;padding-left:12px;margin-bottom:10px;\"><b>What this fixes:</b> “Failed to initialize log file… Access is denied” on Windows.</div>\n\n<div style=\"margin:10px 0 14px 0;\">\n  <img width=\"471\" height=\"201\" alt=\"Access is denied error\" src=\"https://github.com/user-attachments/assets/b1299b43-f3c3-46d9-bd61-7bb4c74184d0\" style=\"max-width:100%;border-radius:10px;border:1px solid rgba(36,240,255,0.35);box-shadow:0 10px 30px rgba(0,0,0,0.35);\" />\n</div>\n\n<ol style=\"margin:0;padding-left:18px;\">\n  <li>Open <b>File Explorer</b>.</li>\n  <li>Locate <b>Revolution Macro</b>.</li>\n  <li>Make sure you <b>extracted</b> the macro (do not run it from inside the zip).</li>\n  <li>If it still fails, move the macro into a normal folder (for example: <b>Downloads</b> or <b>Desktop</b>).</li>\n  <li><b>Important:</b> <code>Revolution Macro.exe</code> must be inside a folder so it can save settings/logs properly.</li>\n</ol>"
+  },
+  
   {
     "title": "Mac Permission Fix",
     "category": "mac",
