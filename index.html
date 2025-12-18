@@ -9,27 +9,29 @@
   <link rel="stylesheet" href="https://stackedit.io/style.css" />
 
   <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='40%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='%2324f0ff' stop-opacity='1'/%3E%3Cstop offset='60%25' stop-color='%2324f0ff' stop-opacity='.35'/%3E%3Cstop offset='100%25' stop-color='%23090b10' stop-opacity='1'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M18 40c7-12 12-17 18-17 6 0 9 4 10 10-2 10-8 15-18 15-5 0-8-2-10-8z' fill='%23090b10' opacity='.9'/%3E%3Cpath d='M20 38c6-10 10-14 16-14 5 0 7 3 8 8-2 8-7 12-16 12-4 0-6-2-8-6z' fill='%2324f0ff' opacity='.9'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='40%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='%234aa3ff' stop-opacity='1'/%3E%3Cstop offset='60%25' stop-color='%234aa3ff' stop-opacity='.35'/%3E%3Cstop offset='100%25' stop-color='%23090b10' stop-opacity='1'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Cpath d='M18 40c7-12 12-17 18-17 6 0 9 4 10 10-2 10-8 15-18 15-5 0-8-2-10-8z' fill='%23090b10' opacity='.9'/%3E%3Cpath d='M20 38c6-10 10-14 16-14 5 0 7 3 8 8-2 8-7 12-16 12-4 0-6-2-8-6z' fill='%234aa3ff' opacity='.9'/%3E%3C/svg%3E" />
 
   <style>
     :root{
-      --pageBlue: #0b78ff;
+      /* Blue-only theme */
+      --pageBlue: #06122a;   /* deep base */
+      --pageBlue2:#050912;
 
       --panel: rgba(12, 14, 18, 0.88);
       --panel2: rgba(20, 24, 33, 0.70);
       --text: #e9e9ea;
       --muted: rgba(233,233,234,0.74);
 
-      --neon: #24f0ff;
+      --neon: #4aa3ff;       /* primary accent */
       --stroke: rgba(255,255,255,0.16);
-      --stroke2: rgba(36,240,255,0.32);
+      --stroke2: rgba(74,163,255,0.34);
 
       --shadow: 0 18px 46px rgba(0,0,0,0.28);
       --shadow2: 0 10px 28px rgba(0,0,0,0.22);
 
       --headerH: 96px;
 
-      --navW: 190px;
+      --navW: 190px; /* kept for compatibility, but sidebar is removed */
       --navGap: 18px;
       --navRadius: 18px;
 
@@ -38,16 +40,28 @@
 
     *{ box-sizing: border-box; }
     html{ scroll-behavior: auto; }
+
+    /* Upgraded background: blue gradients + subtle static noise */
     body{
       margin:0;
       font-family: Arial, sans-serif;
       color: var(--text);
       min-height: 100vh;
       background:
-        radial-gradient(1200px 740px at 18% 10%, rgba(36,240,255,0.14), transparent 60%),
-        radial-gradient(900px 640px at 85% 25%, rgba(36,240,255,0.10), transparent 55%),
-        linear-gradient(160deg, rgba(255,255,255,0.05), rgba(0,0,0,0.12)),
-        var(--pageBlue);
+        radial-gradient(1100px 680px at 18% 8%, rgba(74,163,255,0.20), transparent 62%),
+        radial-gradient(860px 620px at 88% 18%, rgba(47,125,255,0.14), transparent 60%),
+        radial-gradient(900px 760px at 40% 120%, rgba(74,163,255,0.10), transparent 55%),
+        linear-gradient(180deg, var(--pageBlue), var(--pageBlue2) 58%, #040610);
+    }
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.06;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
     }
 
     /* ===== header ===== */
@@ -66,7 +80,7 @@
       position:absolute;
       left:0; right:0; bottom:-1px;
       height:1px;
-      background: linear-gradient(90deg, transparent, rgba(36,240,255,0.40), transparent);
+      background: linear-gradient(90deg, transparent, rgba(74,163,255,0.44), transparent);
       pointer-events:none;
     }
 
@@ -106,7 +120,7 @@
     }
     .typing{
       color: var(--neon);
-      text-shadow: 0 0 16px rgba(36,240,255,0.30);
+      text-shadow: 0 0 16px rgba(74,163,255,0.28);
       font-weight: 900;
     }
     .caret{
@@ -115,7 +129,7 @@
       opacity: 0.95;
       transform: translateY(1px);
       animation: blink 1s steps(1, end) infinite;
-      text-shadow: 0 0 16px rgba(36,240,255,0.30);
+      text-shadow: 0 0 16px rgba(74,163,255,0.28);
     }
     @keyframes blink{ 50%{ opacity: 0; } }
 
@@ -143,12 +157,13 @@
     }
     .pill-link:hover{
       transform: translateY(-1px);
-      border-color: rgba(36,240,255,0.35);
+      border-color: rgba(74,163,255,0.40);
       background: rgba(15,17,21,0.78);
     }
 
+    /* Hamburger now available on all screen sizes (since sidebar is gone) */
     .hamburger{
-      display:none;
+      display:inline-flex;
       width: 42px;
       height: 42px;
       border-radius: 14px;
@@ -163,7 +178,7 @@
     }
     .hamburger:hover{
       transform: translateY(-1px);
-      border-color: rgba(36,240,255,0.35);
+      border-color: rgba(74,163,255,0.40);
       background: rgba(15,17,21,0.78);
     }
 
@@ -191,12 +206,12 @@
     }
     .tab-btn:hover{
       transform: translateY(-1px);
-      border-color: rgba(36,240,255,0.35);
+      border-color: rgba(74,163,255,0.40);
       background: rgba(15,17,21,0.72);
     }
     .tab-btn.active{
-      border-color: rgba(36,240,255,0.52);
-      box-shadow: 0 0 0 1px rgba(36,240,255,0.18) inset, 0 0 26px rgba(36,240,255,0.10);
+      border-color: rgba(74,163,255,0.56);
+      box-shadow: 0 0 0 1px rgba(74,163,255,0.18) inset, 0 0 26px rgba(74,163,255,0.10);
     }
     .tab-dot{
       width: 8px; height: 8px;
@@ -206,7 +221,7 @@
     }
     .tab-btn.active .tab-dot{
       background: var(--neon);
-      box-shadow: 0 0 18px rgba(36,240,255,0.35);
+      box-shadow: 0 0 18px rgba(74,163,255,0.34);
     }
 
     /* ===== app layout ===== */
@@ -217,11 +232,12 @@
       padding-bottom: 28px;
     }
 
+    /* Sidebar removed: force single column */
     .layout{
       display:grid;
-      grid-template-columns: var(--navW) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr);
       gap: var(--navGap);
-      max-width: calc(var(--maxW) + var(--navW) + var(--navGap));
+      max-width: var(--maxW);
       margin: 0 auto;
       align-items:start;
     }
@@ -229,93 +245,8 @@
       grid-template-columns: minmax(0, 1fr);
     }
 
-    /* ===== sidebar ===== */
-    .side{
-      width: var(--navW);
-      position: sticky;
-      top: calc(var(--headerH) + 18px);
-      align-self:start;
-
-      border-radius: var(--navRadius);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04)),
-        rgba(36, 240, 255, 0.14);
-      border: 1px solid rgba(255,255,255,0.14);
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-    }
-
-    .side-header{
-      padding: 14px 12px 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.10);
-      position:relative;
-    }
-    .side-header::after{
-      content:"";
-      position:absolute;
-      left:10px; right:10px; bottom:-1px;
-      height:1px;
-      background: linear-gradient(90deg, transparent, rgba(36,240,255,0.35), transparent);
-      pointer-events:none;
-    }
-    .side-title{
-      font-size: 13px;
-      letter-spacing: 1px;
-      font-weight: 900;
-      text-transform: uppercase;
-      color: rgba(233,233,234,0.88);
-      text-shadow: 0 0 16px rgba(36,240,255,0.10);
-    }
-
-    .side-links{
-      padding: 12px 10px 10px;
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-    }
-
-    .side-links a,
-    .side-links button{
-      display:block;
-      width:100%;
-      text-decoration:none;
-      text-align:left;
-      color: rgba(233,233,234,0.94);
-      font-weight: 900;
-      padding: 10px 10px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(15,17,21,0.55);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      transition: transform .15s ease, border-color .15s ease, background .15s ease;
-      user-select:none;
-      cursor:pointer;
-    }
-    .side-links a:hover,
-    .side-links button:hover{
-      transform: translateY(-1px);
-      border-color: rgba(36,240,255,0.32);
-      background: rgba(15,17,21,0.70);
-    }
-    .side-links a.active{
-      color: var(--neon);
-      border-color: rgba(36,240,255,0.55);
-      box-shadow: 0 0 0 1px rgba(36,240,255,0.12) inset, 0 0 26px rgba(36,240,255,0.10);
-      text-shadow: 0 0 16px rgba(36,240,255,0.20);
-    }
-
-    .side-footer{
-      padding: 0 10px 14px;
-    }
-
-    #sideTopBtn{
-      margin-top: 10px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      font-weight: 1000;
-    }
+    /* ===== sidebar (removed) ===== */
+    .side{ display:none !important; }
 
     /* ===== panel ===== */
     .panel{
@@ -342,7 +273,7 @@
     .stackedit__html a{
       color: var(--text);
       text-decoration: underline;
-      text-decoration-color: rgba(36,240,255,0.35);
+      text-decoration-color: rgba(74,163,255,0.40);
     }
 
     /* REMOVE the weird lines on headers/subheaders */
@@ -389,13 +320,13 @@
     }
     .copy-btn:hover{
       transform: translateY(-1px);
-      border-color: rgba(36,240,255,0.35);
+      border-color: rgba(74,163,255,0.40);
       background: rgba(15,17,21,0.85);
     }
     .copy-btn.copied{
       color: var(--neon);
-      border-color: rgba(36,240,255,0.55);
-      box-shadow: 0 0 18px rgba(36,240,255,0.10);
+      border-color: rgba(74,163,255,0.56);
+      box-shadow: 0 0 18px rgba(74,163,255,0.10);
     }
 
     /* ===== troubleshooting ===== */
@@ -463,13 +394,13 @@
     }
     .ts-filter-pill:hover{
       transform: translateY(-1px);
-      border-color: rgba(36,240,255,0.35);
+      border-color: rgba(74,163,255,0.40);
       background: rgba(15,17,21,0.72);
     }
     .ts-filter-pill.active{
       color: var(--neon);
-      border-color: rgba(36,240,255,0.55);
-      box-shadow: 0 0 0 1px rgba(36,240,255,0.12) inset, 0 0 26px rgba(36,240,255,0.10);
+      border-color: rgba(74,163,255,0.56);
+      box-shadow: 0 0 0 1px rgba(74,163,255,0.12) inset, 0 0 26px rgba(74,163,255,0.10);
     }
 
     .cat-grid{
@@ -480,7 +411,7 @@
     }
 
     .cat-card{
-      border: 1px solid rgba(36,240,255,0.22);
+      border: 1px solid rgba(74,163,255,0.24);
       border-radius: 16px;
       background: rgba(10,12,16,0.42);
       padding: 14px;
@@ -495,18 +426,18 @@
       content:"";
       position:absolute;
       inset:-40px;
-      background: radial-gradient(520px 180px at 20% 20%, rgba(36,240,255,0.18), transparent 60%);
+      background: radial-gradient(520px 180px at 20% 20%, rgba(74,163,255,0.18), transparent 60%);
       opacity: 0.9;
       pointer-events:none;
     }
     .cat-card:hover{
       transform: translateY(-2px);
-      border-color: rgba(36,240,255,0.40);
+      border-color: rgba(74,163,255,0.44);
       background: rgba(10,12,16,0.55);
     }
     .cat-card.active{
-      border-color: rgba(36,240,255,0.62);
-      box-shadow: 0 0 0 1px rgba(36,240,255,0.14) inset, 0 0 34px rgba(36,240,255,0.12);
+      border-color: rgba(74,163,255,0.62);
+      box-shadow: 0 0 0 1px rgba(74,163,255,0.14) inset, 0 0 34px rgba(74,163,255,0.12);
     }
 
     .cat-title{ font-weight: 1000; font-size: 18px; color: var(--text); }
@@ -584,14 +515,11 @@
       box-shadow: 0 10px 22px rgba(0,0,0,0.20);
     }
     #backToTopMobile:hover{
-      border-color: rgba(36,240,255,0.35);
+      border-color: rgba(74,163,255,0.40);
       color: var(--neon);
     }
 
     @media (max-width: 980px){
-      .layout{ grid-template-columns: minmax(0, 1fr); }
-      .side{ display:none; }
-      .hamburger{ display:inline-flex; }
       .cat-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 560px){
@@ -624,7 +552,7 @@
       .header-tabs::-webkit-scrollbar{ display:none; }
     }
 
-    /* drawer (mobile quick jump) */
+    /* drawer (quick jump for all devices now) */
     .drawer-backdrop{
       position: fixed;
       inset: 0;
@@ -645,11 +573,80 @@
       border: 1px solid rgba(255,255,255,0.14);
       background:
         linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04)),
-        rgba(36, 240, 255, 0.14);
+        rgba(74, 163, 255, 0.14);
       box-shadow: var(--shadow);
       display:none;
     }
     .drawer.open, .drawer-backdrop.open{ display:block; animation: fadeInUp 160ms ease both; }
+
+    /* drawer internal styles reused from sidebar */
+    .side-header{
+      padding: 14px 12px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      position:relative;
+    }
+    .side-header::after{
+      content:"";
+      position:absolute;
+      left:10px; right:10px; bottom:-1px;
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(74,163,255,0.38), transparent);
+      pointer-events:none;
+    }
+    .side-title{
+      font-size: 13px;
+      letter-spacing: 1px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: rgba(233,233,234,0.88);
+      text-shadow: 0 0 16px rgba(74,163,255,0.10);
+    }
+    .side-links{
+      padding: 12px 10px 10px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .side-links a,
+    .side-links button{
+      display:block;
+      width:100%;
+      text-decoration:none;
+      text-align:left;
+      color: rgba(233,233,234,0.94);
+      font-weight: 900;
+      padding: 10px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(15,17,21,0.55);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+      user-select:none;
+      cursor:pointer;
+    }
+    .side-links a:hover,
+    .side-links button:hover{
+      transform: translateY(-1px);
+      border-color: rgba(74,163,255,0.34);
+      background: rgba(15,17,21,0.70);
+    }
+    .side-links a.active{
+      color: var(--neon);
+      border-color: rgba(74,163,255,0.56);
+      box-shadow: 0 0 0 1px rgba(74,163,255,0.12) inset, 0 0 26px rgba(74,163,255,0.10);
+      text-shadow: 0 0 16px rgba(74,163,255,0.18);
+    }
+    .side-footer{
+      padding: 0 10px 14px;
+    }
+    #drawerTopBtn{
+      margin-top: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-weight: 1000;
+    }
 
     /* ===== music modal ===== */
     .modal-backdrop{
@@ -707,7 +704,7 @@
     }
     .modal-close:hover{
       transform: translateY(-1px);
-      border-color: rgba(36,240,255,0.35);
+      border-color: rgba(74,163,255,0.40);
       background: rgba(15,17,21,0.78);
       color: var(--neon);
     }
@@ -770,7 +767,7 @@
       position:absolute;
       left:14px; right:14px; bottom:-1px;
       height:1px;
-      background: linear-gradient(90deg, transparent, rgba(36,240,255,0.40), transparent);
+      background: linear-gradient(90deg, transparent, rgba(74,163,255,0.44), transparent);
       pointer-events:none;
     }
     .lang-title{
@@ -796,7 +793,7 @@
       flex: 1;
       min-width: 200px;
       border-radius: 16px;
-      border: 1px solid rgba(36,240,255,0.22);
+      border: 1px solid rgba(74,163,255,0.24);
       background: rgba(10,12,16,0.50);
       padding: 14px;
       cursor:pointer;
@@ -807,7 +804,7 @@
     }
     .lang-choice:hover{
       transform: translateY(-2px);
-      border-color: rgba(36,240,255,0.40);
+      border-color: rgba(74,163,255,0.44);
       background: rgba(10,12,16,0.62);
     }
     .lang-choice .big{
@@ -870,7 +867,7 @@
     </div>
   </div>
 
-  <!-- Mobile drawer -->
+  <!-- Quick Jump drawer (now primary on all devices) -->
   <div id="drawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
   <div id="drawer" class="drawer" aria-hidden="true">
     <div class="side-header">
@@ -921,21 +918,7 @@
   </header>
 
   <main class="app">
-    <div class="layout" id="layout">
-      <!-- Sidebar (Guide only) -->
-      <aside id="side" class="side" aria-label="Quick Jump">
-        <div class="side-header">
-          <div class="side-title" id="sideQuickJumpTitle">Quick Jump</div>
-        </div>
-
-        <!-- EXACTLY 6 items -->
-        <nav id="guideNav" class="side-links"></nav>
-
-        <div class="side-footer">
-          <button id="sideTopBtn" type="button">Top</button>
-        </div>
-      </aside>
-
+    <div class="layout no-side" id="layout">
       <!-- Main content -->
       <section class="main">
         <div class="panel">
@@ -1127,15 +1110,11 @@
       if (tabGuideText) tabGuideText.textContent = t.tabGuide;
       if (tabTroubleText) tabTroubleText.textContent = t.tabTrouble;
 
-      const sideQuick = document.getElementById("sideQuickJumpTitle");
       const drawerQuick = document.getElementById("drawerQuickJumpTitle");
-      if (sideQuick) sideQuick.textContent = t.quickJump;
       if (drawerQuick) drawerQuick.textContent = t.quickJump;
 
-      const sideTopBtn = document.getElementById("sideTopBtn");
       const drawerTopBtn = document.getElementById("drawerTopBtn");
       const backTopMobile = document.getElementById("backToTopMobile");
-      if (sideTopBtn) sideTopBtn.textContent = t.top;
       if (drawerTopBtn) drawerTopBtn.textContent = t.top;
       if (backTopMobile) backTopMobile.textContent = t.top;
 
@@ -1221,7 +1200,6 @@
     }
 
     const layout = document.getElementById("layout");
-    const side = document.getElementById("side");
 
     function openTab(tabId){
       document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
@@ -1233,14 +1211,8 @@
       const btn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
       if (btn) btn.classList.add("active");
 
-      const showNav = (tabId === "guide");
-      if (showNav){
-        side.style.display = "block";
-        layout.classList.remove("no-side");
-      } else {
-        side.style.display = "none";
-        layout.classList.add("no-side");
-      }
+      /* Sidebar removed: always single-column layout */
+      if (layout) layout.classList.add("no-side");
 
       closeDrawer();
       if (tabId === "troubleshooting") ensureIssuesLoaded();
@@ -1278,7 +1250,6 @@
     function goTop(){
       window.scrollTo({ top: 0, behavior: isMobile() ? "auto" : "smooth" });
     }
-    document.getElementById("sideTopBtn").addEventListener("click", goTop);
     document.getElementById("drawerTopBtn").addEventListener("click", () => { goTop(); closeDrawer(); });
 
     const backToTopMobile = document.getElementById("backToTopMobile");
@@ -1403,10 +1374,10 @@
       });
     }
 
+    /* Build Quick Jump (drawer only; still exactly 6 items; still uses heading IDs unchanged) */
     function buildSixItemNav(){
-      const nav = document.getElementById("guideNav");
       const drawerLinks = document.getElementById("drawerLinks");
-      if (!nav || !drawerLinks) return;
+      if (!drawerLinks) return;
 
       const t = I18N[CURRENT_LANG];
 
@@ -1419,7 +1390,6 @@
         { label: t.nav.settings, id: "settings-tab-6" },
       ];
 
-      nav.innerHTML = "";
       drawerLinks.innerHTML = "";
 
       wanted.forEach(item => {
@@ -1435,47 +1405,10 @@
           e.preventDefault();
           scrollToWithOffset(targetEl);
           history.replaceState(null, "", "#" + item.id);
-        });
-
-        const b = a.cloneNode(true);
-        b.addEventListener("click", (e) => {
-          e.preventDefault();
-          scrollToWithOffset(targetEl);
-          history.replaceState(null, "", "#" + item.id);
           closeDrawer();
         });
 
-        nav.appendChild(a);
-        drawerLinks.appendChild(b);
-      });
-
-      setupActiveNavTracking(nav, wanted.map(x => x.id));
-    }
-
-    function setupActiveNavTracking(nav, ids){
-      if (!("IntersectionObserver" in window)) return;
-      const links = Array.from(nav.querySelectorAll("a[data-target]"));
-      const map = new Map(links.map(a => [a.dataset.target, a]));
-
-      const obs = new IntersectionObserver((entries) => {
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-
-        if (!visible.length) return;
-
-        const id = visible[0].target.id;
-        links.forEach(a => a.classList.remove("active"));
-        const link = map.get(id);
-        if (link) link.classList.add("active");
-      }, {
-        threshold: 0.25,
-        rootMargin: "-25% 0px -65% 0px"
-      });
-
-      ids.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) obs.observe(el);
+        drawerLinks.appendChild(a);
       });
     }
 
@@ -1690,6 +1623,3 @@
   </script>
 </body>
 </html>
-
-
-
